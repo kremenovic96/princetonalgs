@@ -1,6 +1,8 @@
 package queues;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /*
  * Deque data structure capable of removing and adding elements both at the start and at the end
  */
@@ -15,14 +17,6 @@ public class Deque<Item> implements Iterable<Item> {
         private Node prev;
     }
     public Deque(){
-       /* last = new Node();
-        first = new Node();
-        first.item = null;
-        last.item = null;
-        first.next = last;
-        last.prev = first;
-        last.next = first;
-        first.prev = last;*/
        first = new Node();
        first.next = first;
        first.prev = first;
@@ -39,7 +33,8 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addFirst(Item item){
-        if(n == 0){
+        if(item == null) throw new IllegalArgumentException();
+        else if(n == 0){
             first.item = item;
             n++;
         }
@@ -55,7 +50,8 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addLast(Item item){
-        if(n == 0){
+        if(item == null) throw new IllegalArgumentException();
+        else if(n == 0){
             first.item = item;
             n++;
         }
@@ -71,7 +67,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Item removeFirst(){
-        if(n == 0) return null;
+        if(n == 0) throw new NoSuchElementException();
         Item firstItem = first.item;
         first = first.next;
         first.prev = last;
@@ -80,6 +76,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Item removeLast(){
+        if(n == 0) throw new NoSuchElementException();
         Item lastItem = last.item;
         last = last.prev;
         last.next = first;
@@ -103,10 +100,15 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if(i>=n) throw new NoSuchElementException();
             Item item = current.item;
             current = current.next;
             i++;
             return item;
+        }
+        @Override
+        public void remove(){
+            throw new UnsupportedOperationException();
         }
     }
 }
