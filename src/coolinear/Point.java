@@ -7,7 +7,7 @@
  *  For use on Coursera, Algorithms Part I programming assignment.
  *
  ******************************************************************************/
-
+package coolinear;
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdDraw;
 
