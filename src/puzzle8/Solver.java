@@ -45,11 +45,23 @@ public class Solver {
         int[][] init = initialBoard.board;
         int size = initialBoard.dimension();
         int inversion = 0;
-        for(int i = 0; i < size; i++)
-            for(int j = 0; j<size-1; j++)
-                if (init[i][j] > init[i][j+1]) inversion++;
-        return inversion % 2 == 0;
+        int blankx =initialBoard.blankPosX;
+        int blanky = initialBoard.blankPosY;
+        int col = 1;
+        for(int i = 0; i < size; i++){
+            if (i != blankx && col != blanky){
+                if (init[i][col] < init[i][col-1]){
+                    inversion++;
+                }
+            }
+            col++;
+            if(col == size){
+                col = 1;
+                //i++;
+            }
+        }
 
+        return inversion % 2 == 0;
     }
     public int moves(){
         if (!isSolvable()) return -1;

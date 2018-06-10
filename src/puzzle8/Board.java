@@ -8,7 +8,7 @@ public class Board {
 
     public int[][] board;
     private int n, manh, hamm;
-    private int blankPosX, blankPosY;
+    public int blankPosX, blankPosY;
     public Board(int[][] blocks){
          n = blocks.length;
         board = new int[n][n];
